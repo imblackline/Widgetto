@@ -8,6 +8,7 @@ import {
 	VscPaintcan,
 	VscRecordKeys,
 	VscSettingsGear,
+	VscCaseSensitive
 } from 'react-icons/vsc'
 import { useTranslation } from 'react-i18next'
 import Analytics from '@/analytics'
@@ -44,7 +45,7 @@ export const SettingModal = ({ isOpen, onClose, selectedTab }: SettingModalProps
 		{
 			label: t('settings.language'),
 			value: 'language',
-			icon: <VscSettingsGear size={20} />,
+			icon: <VscCaseSensitive size={20} />,
 			element: <LanguageTab />,
 		},
 		{
