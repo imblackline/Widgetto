@@ -18,6 +18,8 @@ import { ToolsLayout } from '@/layouts/widgets/tools/tools.layout'
 import { WeatherLayout } from '@/layouts/widgets/weather/weather.layout'
 import { WigiArzLayout } from '@/layouts/widgets/wigiArz/wigi_arz.layout'
 import { YouTubeLayout } from '@/layouts/widgets/youtube/youtube.layout'
+import { WidgetifyLayout } from '@/layouts/widgetify-card/widgetify.layout'
+import { WigiPadWidget } from '@/layouts/widgets/wigiPad/wigiPad.layout'
 import { useAuth } from './auth.context'
 import { CurrencyProvider } from './currency.context'
 
@@ -32,6 +34,7 @@ export enum WidgetKeys {
 	notes = 'notes',
 	youtube = 'youtube',
 	wigiPad = 'wigiPad',
+	widgetifyLayout = 'widgetifyLayout',
 }
 export interface WidgetItem {
 	id: WidgetKeys
@@ -43,6 +46,22 @@ export interface WidgetItem {
 }
 
 export const widgetItems: WidgetItem[] = [
+	{
+		id: WidgetKeys.widgetifyLayout,
+		emoji: '🎯',
+		label: 'ویجتی‌فای کارت',
+		order: -2,
+		node: <WidgetifyLayout />,
+		canToggle: true,
+	},
+	{
+		id: WidgetKeys.wigiPad,
+		emoji: '📱',
+		label: 'ویجی پد',
+		order: -1,
+		node: <WigiPadWidget />,
+		canToggle: true,
+	},
 	{
 		id: WidgetKeys.calendar,
 		emoji: '📅',
@@ -135,6 +154,8 @@ interface WidgetVisibilityContextType {
 }
 
 const defaultVisibility: WidgetKeys[] = [
+	WidgetKeys.widgetifyLayout,
+	WidgetKeys.wigiPad,
 	WidgetKeys.calendar,
 	WidgetKeys.tools,
 	WidgetKeys.todos,

@@ -20,6 +20,7 @@ import {
 	MAX_VISIBLE_WIDGETS,
 	useWidgetVisibility,
 	widgetItems,
+	WidgetKeys,
 } from '@/context/widget-visibility.context'
 import { ItemSelector } from './item-selector'
 import Modal from './modal'
@@ -93,6 +94,18 @@ export function WidgetSettingsModal({ isOpen, onClose }: WidgetSettingsModalProp
 
 		const oldIndex = sortedVisibleWidgets.findIndex((item) => item.id === active.id)
 		const newIndex = sortedVisibleWidgets.findIndex((item) => item.id === over.id)
+
+		// Prevent dragging other widgets above main layout widgets
+		const mainLayoutWidgetIds = [WidgetKeys.widgetifyLayout, WidgetKeys.wigiPad]
+		const draggedWidget = sortedVisibleWidgets[oldIndex]
+		const targetWidget = sortedVisibleWidgets[newIndex]
+		
+		// If dragging a non-main widget above a main layout widget, prevent it
+		if (!mainLayoutWidgetIds.includes(draggedWidget.id) && 
+			mainLayoutWidgetIds.includes(targetWidget.id) && 
+			newIndex < oldIndex) {
+			return
+		}
 
 		reorderWidgets(oldIndex, newIndex)
 	}

@@ -4,7 +4,6 @@ import Tooltip from '@/components/toolTip'
 import { useAuth } from '@/context/auth.context'
 import { useGeneralSetting } from '@/context/general-setting.context'
 import { WidgetContainer } from '../widgets/widget-container'
-import { NotificationCenter } from './notification-center/notification-center'
 import { GoogleOverviewCard } from './overviewCards/google.overviewCard'
 import { TodoOverviewCard } from './overviewCards/todo-overviewCard'
 import { Pet } from './pets/pet'
@@ -63,7 +62,6 @@ export const WidgetifyLayout = () => {
 							<TodoOverviewCard />
 							<GoogleOverviewCard />
 						</div>
-						<NotificationCenter />
 					</div>
 				</div>
 			</div>

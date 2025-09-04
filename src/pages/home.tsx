@@ -16,6 +16,7 @@ import { WeatherProvider } from '@/context/weather.context'
 import {
 	useWidgetVisibility,
 	WidgetVisibilityProvider,
+	WidgetKeys,
 } from '@/context/widget-visibility.context'
 import { BookmarksComponent } from '@/layouts/bookmark/bookmarks'
 import { NavbarLayout } from '@/layouts/navbar/navbar.layout'
@@ -34,8 +35,14 @@ function ContentSection() {
 	const { getSortedWidgets } = useWidgetVisibility()
 	const sortedWidgets = getSortedWidgets()
 
-	const layoutItems = sortedWidgets
-	const bottomCount = layoutItems.length
+	// Separate main layout widgets from bottom widgets
+	const mainLayoutWidgets = sortedWidgets.filter(
+		widget => widget.id === WidgetKeys.widgetifyLayout || widget.id === WidgetKeys.wigiPad
+	)
+	const bottomWidgets = sortedWidgets.filter(
+		widget => widget.id !== WidgetKeys.widgetifyLayout && widget.id !== WidgetKeys.wigiPad
+	)
+	const bottomCount = bottomWidgets.length
 
 	let bottomLayoutClasses =
 		'grid w-full grid-cols-1 gap-2 transition-all duration-300 md:grid-cols-2 lg:grid-cols-4 md:gap-4'
@@ -51,14 +58,40 @@ function ContentSection() {
 					className={`flex flex-col items-center ${layoutPositions[contentAlignment]} flex-1 w-full gap-4 px-2 md:px-4 py-2`}
 				>
 					<div className="flex flex-col w-full gap-4 lg:flex-row lg:gap-2">
-						<div className="order-3 w-full lg:w-1/4 lg:order-1 h-widget">
-							<WidgetifyLayout />
-						</div>
-
-						<div
-							className={
-								'order-1 w-full lg:w-2/4 lg:order-2 lg:px-2 space-y-3'
+						{/* Render main layout widgets in their sorted order */}
+						{mainLayoutWidgets.map((widget, index) => {
+							const isFirst = index === 0
+							const isLast = index === mainLayoutWidgets.length - 1
+							
+							let orderClass = ''
+							let widthClass = 'w-full lg:w-1/4'
+							
+							if (mainLayoutWidgets.length === 1) {
+								// Single widget - position it on the left
+								orderClass = 'order-3 lg:order-1'
+							} else if (mainLayoutWidgets.length === 2) {
+								// Two widgets - first goes left, second goes right
+								if (isFirst) {
+									orderClass = 'order-3 lg:order-1'
+								} else {
+									orderClass = 'order-2 lg:order-3'
+								}
 							}
+							
+							return (
+								<div key={widget.id} className={`${orderClass} ${widthClass} h-widget`}>
+									{widget.node}
+								</div>
+							)
+						})}
+
+						{/* Center content area - always visible and centered with consistent width */}
+						<div
+							className={`order-1 w-full lg:w-2/4 lg:px-2 space-y-3 ${
+								mainLayoutWidgets.length === 0 
+									? 'lg:mx-auto' 
+									: 'lg:order-2'
+							}`}
 						>
 							<SearchLayout />
 							<BookmarkProvider>
@@ -67,13 +100,9 @@ function ContentSection() {
 								</div>
 							</BookmarkProvider>
 						</div>
-
-						<div className="order-2 w-full lg:w-1/4 lg:order-3 h-widget">
-							<WigiPadWidget />
-						</div>
 					</div>
 					<div className={bottomLayoutClasses}>
-						{layoutItems.map((widget) => {
+						{bottomWidgets.map((widget) => {
 							if (bottomCount === 2) {
 								return (
 									<div

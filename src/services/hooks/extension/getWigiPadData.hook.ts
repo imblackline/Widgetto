@@ -38,39 +38,3 @@ export interface NotificationItem {
 	link?: string
 	icon?: string
 }
-export interface WigiPadDataResponse {
-	birthdays: WigiPadBirthday[]
-	notifications: WigiPadNotification[]
-	upcomingCalendarEvents: UpcomingCalendarEvent[]
-	widgetifyCardNotifications: NotificationItem[]
-}
-
-async function fetchWigiPadData(timezone: string): Promise<WigiPadDataResponse> {
-	const client = await getMainClient()
-	const { data } = await client.get<{
-		data: WigiPadDataResponse
-	}>('/extension/wigi-pad-data', {
-		params: {
-			timezone,
-		},
-	})
-
-	return data.data
-}
-
-export function useGetWigiPadData(options: {
-	timezone: string
-	enabled?: boolean
-	refetchInterval?: number | null
-}) {
-	const { enabled = true, refetchInterval = null } = options
-
-	return useQuery<WigiPadDataResponse>({
-		queryKey: ['wigi-pad-data'],
-		queryFn: () => fetchWigiPadData(options.timezone),
-		enabled,
-		refetchInterval: refetchInterval || false,
-		retry: 1,
-		staleTime: 5 * 60 * 1000, // 5 minutes
-	})
-}
