@@ -3,7 +3,6 @@ import { callEvent } from '@/common/utils/call-event'
 import { AvatarComponent } from '@/components/avatar.component'
 import Tooltip from '@/components/toolTip'
 import { useAuth } from '@/context/auth.context'
-import { FriendSettingModal } from '../friends-list/setting/friend-setting.modal'
 import { useTranslation } from 'react-i18next'
 export function ProfileNav() {
 	const { user, isAuthenticated } = useAuth()
@@ -57,13 +56,6 @@ export function ProfileNav() {
 					)}
 				</div>
 			</Tooltip>
-			<FriendSettingModal
-				isOpen={showSettingsModal}
-				selectedTab={'profile'}
-				onClose={() => {
-					setShowSettingsModal(false)
-				}}
-			/>
 		</>
 	)
 }

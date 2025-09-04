@@ -9,8 +9,6 @@ import { useWidgetVisibility } from '@/context/widget-visibility.context'
 import { getConfigData } from '@/services/config-data/config_data-api'
 import { SettingModal } from '../setting/setting-modal'
 import { useTranslation } from 'react-i18next'
-import { FriendsList } from './friends-list/friends'
-import { ProfileNav } from './profile/profile'
 import { SyncButton } from './sync/sync'
 
 export interface PageLink {
@@ -135,8 +133,6 @@ export function NavbarLayout(): JSX.Element {
 					</a>
 				</div>
 				<div className="flex items-center gap-1">
-					<FriendsList />
-					<ProfileNav />
 					<SyncButton />
 					<Tooltip content={t('app.manageWidgets')}>
 						<div
