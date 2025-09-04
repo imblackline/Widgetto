@@ -4,8 +4,10 @@ import { AvatarComponent } from '@/components/avatar.component'
 import Tooltip from '@/components/toolTip'
 import { useAuth } from '@/context/auth.context'
 import { FriendSettingModal } from '../friends-list/setting/friend-setting.modal'
+import { useTranslation } from 'react-i18next'
 export function ProfileNav() {
 	const { user, isAuthenticated } = useAuth()
+	const { t } = useTranslation()
 	const [showSettingsModal, setShowSettingsModal] = useState(false)
 	const handleProfileClick = () => {
 		if (isAuthenticated) setShowSettingsModal(true)
@@ -13,7 +15,7 @@ export function ProfileNav() {
 
 	if (!user) {
 		return (
-			<Tooltip content="ورود به حساب کاربری">
+			<Tooltip content={t('auth.loginToAccount')}>
 				<div
 					className="flex items-center justify-center w-8 h-8 overflow-hidden transition-all border cursor-pointer border-content rounded-xl bg-content backdrop-blur-sm hover:opacity-80"
 					onClick={() => {
@@ -31,9 +33,9 @@ export function ProfileNav() {
 			<Tooltip
 				content={
 					user.inCache ? (
-						<span className="text-error">خطا در بارگیری پروفایل</span>
+						<span className="text-error">{t('profile.errorLoading')}</span>
 					) : (
-						'پروفایل کاربری'
+						t('profile.userProfile')
 					)
 				}
 			>
