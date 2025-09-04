@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "Widgetify",
+  "description": "Transform your new tab into a smart dashboard with Widgetify! Get currency rates, crypto prices, weather & more.",
+  "version": "1.0.21",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "search",
+    "bookmarks",
+    "tabs",
+    "scripting"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "tabGroups"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "widgetify@widgetify-app.github.io"
+    }
+  },
+  "action": {
+    "default_title": "Open Widgetify Dashboard",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "host_permissions": [
+    "https://github.com/*",
+    "https://raw.githubusercontent.com/*",
+    "https://api.github.com/*",
+    "https://api.widgetify.ir/*",
+    "https://www.google-analytics.com/collect*",
+    "https://storage.c2.liara.space/*",
+    "http://localhost/*"
+  ],
+  "commands": {
+    "wxt:reload-extension": {
+      "description": "Reload the extension during development",
+      "suggested_key": {
+        "default": "Alt+R"
+      }
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval' http://localhost:3000; object-src 'self';",
+    "sandbox": "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:3000; sandbox allow-scripts allow-forms allow-popups allow-modals; child-src 'self';"
+  }
+}
