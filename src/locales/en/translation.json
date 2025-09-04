@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "Widgetify",
+    "settings": "Settings",
+    "manageWidgets": "Manage widgets",
+    "getStarted": "Get started"
+  },
+  "auth": {
+    "loginToAccount": "Sign in to your account"
+  },
+  "profile": {
+    "errorLoading": "Error loading profile",
+    "userProfile": "User profile"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "languageDescription": "Choose your preferred language",
+    "languageSaved": "Language preference is saved automatically and will be applied across the entire extension."
+  }
+}

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 @import "./styles/theme-colors.css";
+@import "flag-icons/css/flag-icons.min.css";
 
 html {
 	font-size: 16px !important;

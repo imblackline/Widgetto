@@ -9,6 +9,7 @@ import {
 	VscRecordKeys,
 	VscSettingsGear,
 } from 'react-icons/vsc'
+import { useTranslation } from 'react-i18next'
 import Analytics from '@/analytics'
 import Modal from '@/components/modal'
 import { type TabItem, TabManager } from '@/components/tab-manager'
@@ -17,6 +18,7 @@ import { AboutUsTab } from './tabs/about-us/about-us'
 import { AccountTab } from './tabs/account/account'
 import { AppearanceSettingTab } from './tabs/appearance/appearance'
 import { GeneralSettingTab } from './tabs/general/general'
+import { LanguageTab } from './tabs/language/language'
 import { PetsTab } from './tabs/pets/pets'
 import { PrivacySettings } from './tabs/privacy/privacy-settings'
 import { ShortcutsTab } from './tabs/shortcuts/shortcuts'
@@ -31,12 +33,19 @@ interface SettingModalProps {
 
 export const SettingModal = ({ isOpen, onClose, selectedTab }: SettingModalProps) => {
 	const [isUpdateModalOpen, setUpdateModalOpen] = useState(false)
+	const { t } = useTranslation()
 	const tabs: TabItem[] = [
 		{
 			label: 'عمومی',
 			value: 'general',
 			icon: <VscSettingsGear size={20} />,
 			element: <GeneralSettingTab />,
+		},
+		{
+			label: t('settings.language'),
+			value: 'language',
+			icon: <VscSettingsGear size={20} />,
+			element: <LanguageTab />,
 		},
 		{
 			label: 'حساب کاربری',
@@ -102,7 +111,7 @@ export const SettingModal = ({ isOpen, onClose, selectedTab }: SettingModalProps
 			isOpen={isOpen}
 			onClose={onClose}
 			size="xl"
-			title="تنظیمات"
+			title={t('settings.title')}
 			direction="rtl"
 		>
 			<TabManager

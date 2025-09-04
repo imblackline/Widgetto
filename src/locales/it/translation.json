@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "Widgetify",
+    "settings": "Impostazioni",
+    "manageWidgets": "Gestisci widget",
+    "getStarted": "Inizia"
+  },
+  "auth": {
+    "loginToAccount": "Accedi al tuo account"
+  },
+  "profile": {
+    "errorLoading": "Errore durante il caricamento del profilo",
+    "userProfile": "Profilo utente"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "language": "Lingua",
+    "languageDescription": "Scegli la tua lingua preferita",
+    "languageSaved": "La preferenza della lingua viene salvata automaticamente e verrà applicata in tutta l'estensione."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "ویجتی‌فای",
+    "settings": "تنظیمات",
+    "manageWidgets": "مدیریت ویجت‌ها",
+    "getStarted": "شروع کنید"
+  },
+  "auth": {
+    "loginToAccount": "ورود به حساب کاربری"
+  },
+  "profile": {
+    "errorLoading": "خطا در بارگیری پروفایل",
+    "userProfile": "پروفایل کاربری"
+  },
+  "settings": {
+    "title": "تنظیمات",
+    "language": "زبان",
+    "languageDescription": "زبان مورد نظر خود را انتخاب کنید",
+    "languageSaved": "تنظیمات زبان به صورت خودکار ذخیره می‌شود و در تمام قسمت‌های افزونه اعمال خواهد شد."
+  }
+}

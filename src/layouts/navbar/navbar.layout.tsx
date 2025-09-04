@@ -106,32 +106,8 @@ export function NavbarLayout(): JSX.Element {
 
 	return (
 		<>
-			<nav className="flex items-center justify-between px-4 mt-0.5 md:mt-1.5">
-				<div className="flex items-center gap-0.5">
-					<a
-						href="https://widgetify.ir"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="flex items-center gap-2"
-					>
-						{logoData.logoUrl && (
-							<img
-								src={logoData.logoUrl}
-								alt={logoData.content || 'ویجتی‌فای'}
-								className="w-6 h-6 rounded-full"
-							/>
-						)}
-						{logoData.content && (
-							<div
-								className="leading-relaxed"
-								// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-								dangerouslySetInnerHTML={{
-									__html: logoData.content,
-								}}
-							/>
-						)}
-					</a>
-				</div>
+			<nav className="flex items-center justify-start px-4 mt-0.5 md:mt-1.5">
+
 				<div className="flex items-center gap-1">
 					<SyncButton />
 					<Tooltip content={t('app.manageWidgets')}>
@@ -150,14 +126,20 @@ export function NavbarLayout(): JSX.Element {
 							<VscSettings size={18} className="text-muted" />
 						</div>
 					</Tooltip>
-					{/* <select
-						className="select select-sm select-bordered ml-2"
-						value={i18n.language.startsWith('it') ? 'it' : 'en'}
-						onChange={(e) => i18n.changeLanguage(e.target.value)}
-					>
-						<option value="en">EN</option>
-						<option value="it">IT</option>
-					</select> */}
+					<Tooltip content={t('settings.language')}>
+						<div
+							className="flex items-center w-8 h-8 gap-2 px-2 overflow-hidden transition-all border cursor-pointer border-content rounded-xl bg-content backdrop-blur-sm hover:opacity-80"
+							onClick={() => {
+								setShowSettings(true)
+								setTab('language')
+							}}
+						>
+							<span className="text-muted">
+								{i18n.language.startsWith('fa') ? 'فا' : 
+								 i18n.language.startsWith('it') ? 'it' : 'en'}
+							</span>
+						</div>
+					</Tooltip>
 				</div>
 			</nav>
 			<SettingModal

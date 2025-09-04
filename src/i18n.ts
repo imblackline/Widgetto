@@ -2,40 +2,20 @@ import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
+// Import translation files
+import enTranslation from './locales/en/translation.json'
+import itTranslation from './locales/it/translation.json'
+import faTranslation from './locales/fa/translation.json'
+
 const resources = {
   en: {
-    translation: {
-      app: {
-        title: 'Widgetify',
-        settings: 'Settings',
-        manageWidgets: 'Manage widgets',
-        getStarted: 'Get started',
-      },
-      auth: {
-        loginToAccount: 'Sign in to your account',
-      },
-      profile: {
-        errorLoading: 'Error loading profile',
-        userProfile: 'User profile',
-      },
-    },
+    translation: enTranslation,
   },
   it: {
-    translation: {
-      app: {
-        title: 'Widgetify',
-        settings: 'Impostazioni',
-        manageWidgets: 'Gestisci widget',
-        getStarted: 'Inizia',
-      },
-      auth: {
-        loginToAccount: 'Accedi al tuo account',
-      },
-      profile: {
-        errorLoading: 'Errore durante il caricamento del profilo',
-        userProfile: 'Profilo utente',
-      },
-    },
+    translation: itTranslation,
+  },
+  fa: {
+    translation: faTranslation,
   },
 }
 
@@ -45,7 +25,7 @@ i18next
   .init({
     resources,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'it'],
+    supportedLngs: ['en', 'it', 'fa'],
     interpolation: { escapeValue: false },
     detection: {
       order: ['localStorage', 'navigator', 'querystring', 'cookie', 'htmlTag'],
