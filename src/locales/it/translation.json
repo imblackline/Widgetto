@@ -17,5 +17,30 @@
     "language": "Lingua",
     "languageDescription": "Scegli la tua lingua preferita",
     "languageSaved": "La preferenza della lingua viene salvata automaticamente e verrà applicata in tutta l'estensione."
+  },
+  "extensionModal": {
+    "welcomeTitle": "🎉 Benvenuto in Widgetto",
+    "activationImageAlt": "Come attivare l'estensione",
+    "activationWarning": "Per attivare l'estensione, clicca sul pulsante \"Keep It\". ⚠️",
+    "keepItButton": "Ho cliccato Keep It",
+    "readyToStartTitle": "Pronto per iniziare?",
+    "readyToStartMessage": "Iniziamo una nuova ed entusiasmante esperienza! 😎",
+    "getStartedButton": "Inizia",
+    "privacyNoticeTitle": "Informativa sulla Privacy",
+    "privacySummaryTitle": "Riepilogo della Politica sulla Privacy di Widgetify:",
+    "privacyPoints": {
+      "noPersonalData": "Nessun dato personale viene raccolto per impostazione predefinita.",
+      "localStorage": "Le impostazioni vengono salvate solo sul tuo dispositivo (Local Storage).",
+      "optionalSync": "Le informazioni opzionali come nome ed email vengono utilizzate solo per la sincronizzazione tra dispositivi (se lo desideri).",
+      "googleOptional": "La connessione a Google è completamente opzionale e viene utilizzata solo per visualizzare gli eventi del calendario (accesso in sola lettura).",
+      "noThirdParty": "Nessun dato viene condiviso con terze parti.",
+      "openSource": "Widgetify è open source e il suo codice può essere esaminato su GitHub.",
+      "dataDeletion": "Le richieste di cancellazione completa dei dati possono essere effettuate in qualsiasi momento tramite privacy@widgetify.ir."
+    },
+    "declineMessage": "Se rifiuti, l'estensione non sarà in grado di svolgere le sue funzioni principali. Puoi disinstallare l'estensione ora se lo desideri.",
+    "viewFullPrivacy": "Visualizza la politica sulla privacy completa",
+    "uninstallExtension": "Disinstalla Estensione",
+    "acceptPrivacy": "✅ Accetto",
+    "goToStep": "Vai al passaggio"
   }
 }

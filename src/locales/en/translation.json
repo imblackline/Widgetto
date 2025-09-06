@@ -17,5 +17,30 @@
     "language": "Language",
     "languageDescription": "Choose your preferred language",
     "languageSaved": "Language preference is saved automatically and will be applied across the entire extension."
+  },
+  "extensionModal": {
+    "welcomeTitle": "🎉 Welcome to Widgetto",
+    "activationImageAlt": "How to activate extension",
+    "activationWarning": "To activate the extension, click the \"Keep It\" button ⚠️",
+    "keepItButton": "I clicked Keep It",
+    "readyToStartTitle": "Ready to get started?",
+    "readyToStartMessage": "Let's start a new and exciting experience! 😎",
+    "getStartedButton": "Get Started",
+    "privacyNoticeTitle": "Privacy Notice",
+    "privacySummaryTitle": "Widgetify Privacy Policy Summary:",
+    "privacyPoints": {
+      "noPersonalData": "No personal data is collected by default.",
+      "localStorage": "Settings are only stored on your device (Local Storage).",
+      "optionalSync": "Optional information like name and email is only used for synchronization between devices (if you choose to).",
+      "googleOptional": "Google connection is completely optional and only used to display calendar events (read-only access).",
+      "noThirdParty": "No data is shared with third parties.",
+      "openSource": "Widgetify is open source and its code can be reviewed on GitHub.",
+      "dataDeletion": "Complete data deletion requests can be made at any time via privacy@widgetify.ir."
+    },
+    "declineMessage": "If you decline, the extension will not be able to perform its main functions. You can uninstall the extension now if you wish.",
+    "viewFullPrivacy": "View full privacy policy",
+    "uninstallExtension": "Uninstall Extension",
+    "acceptPrivacy": "✅ I Accept",
+    "goToStep": "Go to step"
   }
 }

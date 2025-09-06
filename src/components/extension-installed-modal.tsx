@@ -1,6 +1,7 @@
 import { domAnimation, LazyMotion, m } from 'framer-motion'
 import { useState } from 'react'
 import { FaExternalLinkAlt, FaTrash } from 'react-icons/fa'
+import { useTranslation } from 'react-i18next'
 import keepItImage from '@/assets/keep-it.png'
 import { Button } from './button/button'
 import Modal from './modal'
@@ -17,8 +18,9 @@ export function ExtensionInstalledModal({
 	show,
 	onGetStarted,
 }: ExtensionInstalledModalProps) {
+	const { t } = useTranslation()
 	const [currentStep, setCurrentStep] = useState<Step>(1)
-	const totalSteps = 2
+	const totalSteps = 1
 
 	const renderStepContent = () => {
 		switch (currentStep) {
@@ -26,7 +28,7 @@ export function ExtensionInstalledModal({
 				if (import.meta.env.FIREFOX) {
 					return <StepFirefoxConsent setCurrentStep={setCurrentStep} />
 				}
-				return <StepOne setCurrentStep={setCurrentStep} />
+				return <StepOne onGetStarted={onGetStarted} />
 			case 2:
 				return <StepTwo onGetStarted={onGetStarted} />
 			default:
@@ -50,7 +52,7 @@ export function ExtensionInstalledModal({
 							? undefined
 							: setCurrentStep((index + 1) as Step)
 					}
-					aria-label={`رفتن به گام ${index + 1}`}
+					aria-label={`${t('extensionModal.goToStep')} ${index + 1}`}
 					aria-current={index + 1 === currentStep ? 'step' : undefined}
 					className={`w-10 h-2 ${import.meta.env.FIREFOX ? 'cursor-default' : 'cursor-pointer'} rounded-full transition-all duration-300 ${
 						index + 1 === currentStep
@@ -90,14 +92,16 @@ export function ExtensionInstalledModal({
 }
 
 interface StepOneProps {
-	setCurrentStep: (step: Step) => void
+	onGetStarted: () => void
 }
-const StepOne = ({ setCurrentStep }: StepOneProps) => {
+const StepOne = ({ onGetStarted }: StepOneProps) => {
+	const { t } = useTranslation()
+	
 	return (
 		<>
 			<div className="mb-3">
 				<h3 className={'mb-0 text-2xl font-bold text-content'}>
-					به ویجتی‌فای خوش آمدید! 🎉
+					{t('extensionModal.welcomeTitle')}
 				</h3>
 			</div>
 
@@ -109,7 +113,7 @@ const StepOne = ({ setCurrentStep }: StepOneProps) => {
 				<div className="flex items-center justify-center">
 					<img
 						src={keepItImage}
-						alt="نحوه فعالسازی افزونه"
+						alt={t('extensionModal.activationImageAlt')}
 						className="h-auto max-w-full rounded-lg shadow-xl"
 						style={{ maxHeight: '220px' }}
 					/>
@@ -122,15 +126,15 @@ const StepOne = ({ setCurrentStep }: StepOneProps) => {
 				}
 			>
 				<p className="font-bold text-muted">
-					⚠️ برای فعالسازی افزونه، روی دکمه "Keep It" کلیک کنید.
+					{t('extensionModal.activationWarning')}
 				</p>
 			</div>
 
 			<button
-				onClick={() => setCurrentStep(2)}
+				onClick={onGetStarted}
 				className="px-8 py-3 font-light text-white transition-all cursor-pointer duration-300 transform bg-blue-600 bg-opacity-80 border border-blue-400/30 rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.2)] hover:bg-opacity-90 hover:shadow-xl backdrop-blur-sm"
 			>
-				Keep It رو زدم!
+				{t('extensionModal.keepItButton')}
 			</button>
 		</>
 	)
@@ -140,6 +144,8 @@ interface StepThreeProps {
 	onGetStarted: () => void
 }
 const StepTwo = ({ onGetStarted }: StepThreeProps) => {
+	const { t } = useTranslation()
+	
 	return (
 		<>
 			<m.div
@@ -149,7 +155,7 @@ const StepTwo = ({ onGetStarted }: StepThreeProps) => {
 				transition={{ duration: 0.5, delay: 0.2 }}
 			>
 				<h3 className={'mb-3 text-2xl font-bold text-content'}>
-					آماده شروع هستید؟
+					{t('extensionModal.readyToStartTitle')}
 				</h3>
 			</m.div>
 
@@ -162,7 +168,7 @@ const StepTwo = ({ onGetStarted }: StepThreeProps) => {
 				transition={{ duration: 0.5, delay: 0.3 }}
 			>
 				<p className="text-muted">
-					بریم که یک تجربه جدید و جذاب را شروع کنیم! 😎
+					{t('extensionModal.readyToStartMessage')}
 				</p>
 			</m.div>
 
@@ -171,7 +177,7 @@ const StepTwo = ({ onGetStarted }: StepThreeProps) => {
 					onClick={onGetStarted}
 					className="px-6 py-3 font-medium text-white transition-all duration-300 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 border border-blue-400/30 rounded-lg shadow-[0_8px_16px_rgba(0,0,0,0.2)] cursor-pointer hover:bg-opacity-90 hover:shadow-[0_12px_20px_rgba(0,0,0,0.25)] backdrop-blur-sm w-full sm:flex-1"
 				>
-					شروع کنید
+					{t('extensionModal.getStartedButton')}
 				</button>
 			</div>
 		</>
@@ -182,6 +188,8 @@ interface StepFirefoxConsentProps {
 	setCurrentStep: (step: Step) => void
 }
 const StepFirefoxConsent = ({ setCurrentStep }: StepFirefoxConsentProps) => {
+	const { t } = useTranslation()
+	
 	const handleDecline = () => {
 		if (browser.management?.uninstallSelf) {
 			// @ts-expect-error
@@ -195,37 +203,27 @@ const StepFirefoxConsent = ({ setCurrentStep }: StepFirefoxConsentProps) => {
 
 	return (
 		<div className="w-full overflow-clip">
-			<h3 className="mb-3 text-2xl font-bold text-content">Privacy Notice</h3>
-			<p className="mb-2 font-semibold">خلاصه سیاست حریم خصوصی ویجتی‌فای:</p>
+			<h3 className="mb-3 text-2xl font-bold text-content">{t('extensionModal.privacyNoticeTitle')}</h3>
+			<p className="mb-2 font-semibold">{t('extensionModal.privacySummaryTitle')}</p>
 			<div className="w-full px-2">
 				<ul className="w-full h-56 space-y-1 overflow-y-auto text-xs list-disc list-inside border border-content rounded-2xl">
-					<li>هیچ داده شخصی به‌طور پیش‌فرض جمع‌آوری نمی‌شود.</li>
-					<li>تنظیمات فقط در دستگاه شما (Local Storage) ذخیره می‌شوند.</li>
+					<li>{t('extensionModal.privacyPoints.noPersonalData')}</li>
+					<li>{t('extensionModal.privacyPoints.localStorage')}</li>
 					<li>
-						اطلاعات اختیاری مثل نام و ایمیل فقط برای همگام‌سازی بین دستگاه‌ها
-						استفاده می‌شوند (در صورت تمایل شما).
+						{t('extensionModal.privacyPoints.optionalSync')}
 					</li>
 					<li>
-						اتصال به گوگل کاملاً اختیاری است و فقط برای نمایش رویدادهای تقویم
-						(دسترسی خواندنی) استفاده می‌شود.
+						{t('extensionModal.privacyPoints.googleOptional')}
 					</li>
-					<li>هیچ داده‌ای با اشخاص ثالث به اشتراک گذاشته نمی‌شود.</li>
-					<li>ویجتی‌فای متن‌باز است و کد آن روی GitHub قابل بررسی است.</li>
+					<li>{t('extensionModal.privacyPoints.noThirdParty')}</li>
+					<li>{t('extensionModal.privacyPoints.openSource')}</li>
 					<li>
-						درخواست حذف کامل داده‌ها در هر زمان از طریق{' '}
-						<a
-							href="mailto:privacy@widgetify.ir"
-							className="text-blue-600 underline"
-						>
-							privacy@widgetify.ir
-						</a>{' '}
-						ممکن است.
+						{t('extensionModal.privacyPoints.dataDeletion')}
 					</li>
 				</ul>
 
 				<p className="mt-2 text-sm text-content">
-					اگر رد کنید، افزونه قادر به انجام وظایف اصلی خود نخواهد بود. در صورت
-					تمایل می‌توانید افزونه را همین حالا حذف کنید.
+					{t('extensionModal.declineMessage')}
 				</p>
 				<a
 					href="https://widgetify.ir/privacy"
@@ -234,7 +232,7 @@ const StepFirefoxConsent = ({ setCurrentStep }: StepFirefoxConsentProps) => {
 					className="flex items-center justify-center font-medium underline text-primary gap-0.5"
 				>
 					<FaExternalLinkAlt />
-					مشاهده سیاست کامل حریم خصوصی
+					{t('extensionModal.viewFullPrivacy')}
 				</a>
 			</div>
 
@@ -244,14 +242,14 @@ const StepFirefoxConsent = ({ setCurrentStep }: StepFirefoxConsentProps) => {
 					size="md"
 					className="flex items-center justify-center w-40 btn btn-error rounded-xl"
 				>
-					<FaTrash /> حذف افزونه
+					<FaTrash /> {t('extensionModal.uninstallExtension')}
 				</Button>
 				<Button
 					onClick={() => setCurrentStep(2)}
 					size="md"
 					className="w-40 btn btn-success rounded-xl"
 				>
-					✅ قبول می‌کنم
+					{t('extensionModal.acceptPrivacy')}
 				</Button>
 			</div>
 		</div>
